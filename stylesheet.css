@@ -1,0 +1,35 @@
+body{
+
+  width: 800px;
+  border: 1px solid;
+}
+
+.fruit{
+  display: inline-block;
+  height:150px;
+  width:150px;
+  border: 1px solid;
+  margin-left: 30px;
+  margin-top: 50px;
+}
+
+.priceDisplay{
+  display: inline-block;
+  height:50px;
+  width:150px;
+  border: 1px solid;
+  margin-left: 30px;
+  margin-top: 50px;
+
+}
+
+.cashDisplay{
+  margin-top:100px;
+  font-size: 30pt;
+  margin-left: 300px  ;
+}
+
+button{
+  width:40px;
+
+}
