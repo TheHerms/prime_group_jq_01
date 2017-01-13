@@ -4,15 +4,18 @@ console.log('inside jquery.....');
 
 var totalCash=100;
 // function Fruit(name,quantity,currentPrice,totalCost)
+
+// Building an object for each fruit.
 var banana=new Fruit('banana',randomStartPrice(),0,0);
 var apple=new Fruit('apple',randomStartPrice(),0,0);
 var orange=new Fruit('orange',randomStartPrice(),0,0);
 var grape=new Fruit('grapes',randomStartPrice(),0,0);
+
+// adding all  fruit objects created to an array
 var arr1 = [banana, apple, orange,grape];
 //console.log(arr1);
+
 for(var i=0;i<arr1.length;i++){
-	//console.log(arr1.length);
-	//console.log(arr[i]);
 	var fruit='<div class="fruit"><span>'+arr1[i].name+'</span></div>';
 	$('.fruits').append(fruit);
 	var priceDiv='<div  id="'+arr1[i].name+'"'+'class="priceDisplay">'+
@@ -21,7 +24,9 @@ for(var i=0;i<arr1.length;i++){
 	$('.priceDisplays').append(priceDiv);
 }
 
-$('#totalCash').append('<span>'+totalCash+'</span>');
+tableDisplay();
+updateTotalCash();
+
 
 $('button').on ('click', function() {
 	var fruit=$(this).parent().attr('id')
@@ -29,75 +34,58 @@ $('button').on ('click', function() {
 	arr1.forEach(function(o){
 	//	console.log("inside looping function"+o.name);
 		if(o.name==fruit){
-
 			var price=Number(o.currentPrice);
 			o.totalCost=Number(o.totalCost)+price;
-			totalCash=totalCash-price;
+			totalCash=Number(totalCash-price).toFixed(2);
 			o.quantity++
-			updateSpanFunction(totalCash);
-			//console.log(totalCash);
+			updateTotalCash();
+			tableDisplay();
 			console.log(arr1);
 		}
 
 
 	});
-//console.log("price after the fo each"+price);
-
-	//console.log($(this).parent().attr('id'));
-
 
 });
+
+function tableDisplay(){
+	$('.displayDetails').children().remove();
+for(var i=0;i<arr1.length;i++){
+ var name=arr1[i].name;
+ var quantity=Number(arr1[i].quantity);
+ var totalCost=Number(arr1[i].totalCost);
+	 var averagePrice=totalCost/quantity;
+
+	 var strBuilder='<tr id="'+name+'">'+
+	 								'<td>'+name+'</td>'+
+									'<td>'+quantity+'</td>'+
+									'<td>'+averagePrice+'</td>'
+    $('.displayDetails').append(strBuilder);
+	 console.log("name: "+name+"  quantity: "+quantity+" totalCost: "+totalCost);
+
+}
+
+}
 
 	var that=this;
 	// console.log(that);
 	var temp = 0;
 	setInterval(function(){
-
 		for(let i=0;i<arr1.length;i++){
-		//console.log('inside settimeout....')
-		//console.log( arr1[i]);
-
 		var temp='#'+'price'+arr1[i].name;
-		// var temp=arr1[i].currentPrice;
-		//console.log('temp = ',temp);
-		// var currentPrice=$(that).find(temp).text();
-		// console.log('price....'+currentPrice);
 		$(that).find(temp).remove();
-
-		//console.log('current price is: '+arr1[i].currentPrice);
-		//console.log('random price'+generateRandomPrice());
 		var randomNumber = Number(generateRandomPrice());
-
 		arr1[i].currentPrice=Number(Number(arr1[i].currentPrice)+Number(randomNumber)).toFixed(2);
-		///console.log(randomNumber);
-		//console.log('NEW price is: ' + arr1[i].currentPrice);
-
-
 		 var newPriceDiv='<span id="price'+arr1[i].name+'">'+arr1[i].currentPrice+'</span>';
 		 var div='#'+arr1[i].name;
-		 //console.log('div.....'+div);
 		 $(div).append(newPriceDiv);
-
 	}
-},5000)
+  },5000)
 
-function updateSpanFunction(totalCost){
+function updateTotalCash(){
 	$('#totalCash').find('span').remove();
-$('#totalCash').append('<span>'+totalCash+'</span>');
-
+  $('#totalCash').append('<span>'+totalCash+'</span>');
 }
-
-	// var temp='#'+'price'+arr1[j];
-	// var currentPrice=$(temp).text();
-	// console.log(currentPrice);
-	// $('.priceDisplays').find(temp).remove();
-	// currentPrice+=generateRandomPrice;
-	// var newPriceDiv='<span id="price'+arr1[j]+'" data-'+arr1[j]+'="'+currentPrice+'">'+currentPrice+'</span>';
-	// var priceDiv='<div  class="priceDisplay">'+
-	// 						'<button>Buy</button>'+
-	// 						'<span data-'+arr1[i]+'="'+price+'">'+price+'</span>';
- //settimeOut()
-
 
 
 })
@@ -112,6 +100,7 @@ function randomStartPrice() {
 function generateRandomPrice() {
 	return (Math.random() * (-0.5 - 0.5) + 0.5).toFixed(2);
 }
+
 
 function Fruit(name,currentPrice,quantity,totalCost){
 			this.name=name;
