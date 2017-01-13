@@ -1,5 +1,6 @@
 $(function(){
 
+//startTime();
 console.log('inside jquery.....');
 
 var totalCash=100;
@@ -19,7 +20,8 @@ for(var i=0;i<arr1.length;i++){
 	var fruit='<div class="fruit"><span>'+arr1[i].name+'</span></div>';
 	$('.fruits').append(fruit);
 	var priceDiv='<div  id="'+arr1[i].name+'"'+'class="priceDisplay">'+
-							'<button>Buy</button>'+
+							'<button class="buy">Buy</button>'+
+							'<button class="sell">Sell</button>'+
 							'<span id="price'+arr1[i].name+'" data-'+arr1[i].name+'="'+arr1[i].currentPrice+'">'+arr1[i].currentPrice+'</span></div>';
 	$('.priceDisplays').append(priceDiv);
 }
@@ -27,8 +29,33 @@ for(var i=0;i<arr1.length;i++){
 tableDisplay();
 updateTotalCash();
 
+$('.sell').on('click',function(){
+	console.log("user clicked on the sell buttn");
+	var fruit=$(this).parent().attr('id');
+	//var currentPrice=Number($(this).parent().find('span').text());
+	arr1.forEach(function(o){
+	//	console.log("inside looping function"+o.name);
+		if(o.name==fruit && o.quantity>0){
+			var price=Number(o.currentPrice);
+			console.log('price....'+price);
+			o.totalCost=Number(o.totalCost)-price;
+			console.log('total  cost...'+o.totalCost);
+     console.log('totalCash before calculation...'+totalCash+price);
+			totalCash=Number(Number(totalCash)+Number(price)).toFixed(2);
+			console.log('totalCash....'+totalCash);
+			o.quantity--;
+			updateTotalCash();
+			tableDisplay();
+			console.log(arr1);
 
-$('button').on ('click', function() {
+			}
+
+	});
+
+
+})
+
+$('.buy').on ('click', function() {
 	var fruit=$(this).parent().attr('id');
   var currentPrice=Number($(this).parent().find('span').text());
 console.log('current price from data attribute'+currentPrice);
@@ -63,7 +90,7 @@ for(var i=0;i<arr1.length;i++){
  var name=arr1[i].name;
  var quantity=Number(arr1[i].quantity);
  var totalCost=Number(arr1[i].totalCost);
-	 var averagePrice=totalCost/quantity;
+	var averagePrice=(isNaN(totalCost/quantity))?0:totalCost/quantity;
 
 	 var strBuilder='<tr id="'+name+'">'+
 	 								'<td>'+name+'</td>'+
@@ -79,7 +106,7 @@ for(var i=0;i<arr1.length;i++){
 	var that=this;
 	// console.log(that);
 	var temp = 0;
-	setInterval(function(){
+	var timer=setInterval(function(){
 		for(let i=0;i<arr1.length;i++){
 		var temp='#'+'price'+arr1[i].name;
 		$(that).find(temp).remove();
@@ -88,8 +115,10 @@ for(var i=0;i<arr1.length;i++){
 		 var newPriceDiv='<span id="price'+arr1[i].name+'"  data-'+arr1[i].name+'="'+arr1[i].currentPrice+'">'+arr1[i].currentPrice+'</span>';
 		 var div='#'+arr1[i].name;
 		 $(div).append(newPriceDiv);
+
+		 //clearInterval(timer);
 	}
-  },5000)
+},15000)
 
 function updateTotalCash(){
 	$('#totalCash').find('span').remove();
@@ -100,6 +129,17 @@ function runOutOfCashFunction(){
 	$('#totalCash').append('<div  id="notEnoughCash"><span>Not Enough Cash  in the Bank</span></div>');
 }
 
+
+// function startTime() {
+//     var now=new Date();
+//     var newtime = now.getSeconds()+300000;
+//
+//     var time=$('.countdownContainer').find('span').text();
+//
+// 		$('.countdownContainer').find('span').remove();
+//     $('.countdownContainer').append('<span>'+s+'</span>');
+//     var t = setTimeout(startTime, 1000);
+// }
 })
 
 

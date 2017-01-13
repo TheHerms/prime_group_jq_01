@@ -33,3 +33,14 @@ button{
   width:40px;
 
 }
+
+.countdownContainer{
+  width:200px;
+  height:40px;
+  text-align: center;
+  background:#ddd;
+  border:1px solid #999;
+  border-radius: 10px;
+  padding:10px;
+  box-shadow: 0 0 5px 3px #ccc;
+}
