@@ -44,3 +44,23 @@ button{
   padding:10px;
   box-shadow: 0 0 5px 3px #ccc;
 }
+
+
+table {
+   margin-top: 30px;
+    border-collapse: collapse;
+    width: 50%;
+    border: 1px solid ;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
