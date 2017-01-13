@@ -29,8 +29,15 @@ updateTotalCash();
 
 
 $('button').on ('click', function() {
-	var fruit=$(this).parent().attr('id')
+	var fruit=$(this).parent().attr('id');
+  var currentPrice=Number($(this).parent().find('span').text());
+console.log('current price from data attribute'+currentPrice);
 //console.log(arr1);
+if(totalCash-currentPrice<=0){
+
+	console.log('you have run out of cash');
+	runOutOfCashFunction();
+}else{
 	arr1.forEach(function(o){
 	//	console.log("inside looping function"+o.name);
 		if(o.name==fruit){
@@ -41,10 +48,12 @@ $('button').on ('click', function() {
 			updateTotalCash();
 			tableDisplay();
 			console.log(arr1);
-		}
 
+      }
 
 	});
+
+}
 
 });
 
@@ -76,7 +85,7 @@ for(var i=0;i<arr1.length;i++){
 		$(that).find(temp).remove();
 		var randomNumber = Number(generateRandomPrice());
 		arr1[i].currentPrice=Number(Number(arr1[i].currentPrice)+Number(randomNumber)).toFixed(2);
-		 var newPriceDiv='<span id="price'+arr1[i].name+'">'+arr1[i].currentPrice+'</span>';
+		 var newPriceDiv='<span id="price'+arr1[i].name+'"  data-'+arr1[i].name+'="'+arr1[i].currentPrice+'">'+arr1[i].currentPrice+'</span>';
 		 var div='#'+arr1[i].name;
 		 $(div).append(newPriceDiv);
 	}
@@ -87,6 +96,9 @@ function updateTotalCash(){
   $('#totalCash').append('<span>'+totalCash+'</span>');
 }
 
+function runOutOfCashFunction(){
+	$('#totalCash').append('<div  id="notEnoughCash"><span>Not Enough Cash  in the Bank</span></div>');
+}
 
 })
 
