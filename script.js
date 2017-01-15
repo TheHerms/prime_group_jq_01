@@ -4,7 +4,42 @@ $(function(){
 console.log('inside jquery.....');
 
 var totalCash=100;
+var timeCounter=0;
 // function Fruit(name,quantity,currentPrice,totalCost)
+var timeTracker=setInterval(timeUpdate,1000);
+
+
+
+function timeUpdate(){
+  timeCounter++;
+	var time=$('.countdownContainer').find('span').text();
+	    $('.countdownContainer').find('span').remove();
+	   $('.countdownContainer').append('<span>Timer :: '+timeCounter+'</span>');
+
+	if(timeCounter==10){
+		  console.log('stopping newPriceGenerator loop');
+	    clearInterval(newPriceGenerator);
+      clearInterval(timeTracker);
+       calculateProfit();
+	 }
+}
+
+
+function calculateProfit(){
+var spentCash= 100 - totalCash;
+var stockSaleCash=0;
+var profit;
+for(var i=0;i<arr1.length;i++){
+	var calprice=Number(arr1[i].currentStockValue());
+	console.log("calprice: "+arr1[i]+'::'+calprice);
+stockSaleCash=Number(Number(stockSaleCash)+Number(arr1[i].currentStockValue())).toFixed(2);
+console.log("stock sale Cash: "+arr1[i]+'::'+stockSaleCash);
+}
+//console.log("spend Cash::"+spentCash);
+//console.log("stock sale Cash::"+stockSaleCash);
+profit=Number(stockSaleCash-spentCash).toFixed(2);
+$('.finalProfitDisplay').append('<span>Total Profit Made :: '+profit+'</span>');
+}
 
 // Building an object for each fruit.
 var banana=new Fruit('banana',randomStartPrice(),0,0);
@@ -15,9 +50,9 @@ var grape=new Fruit('grapes',randomStartPrice(),0,0);
 // adding all  fruit objects created to an array
 var arr1 = [banana, apple, orange,grape];
 //console.log(arr1);
-
+//background-image: url("paper.gif");
 for(var i=0;i<arr1.length;i++){
-	var fruit='<div class="fruit"><span>'+arr1[i].name+'</span></div>';
+	var fruit='<div class="fruit"  id="'+arr1[i].name+'"><span>'+arr1[i].name+'</span></div>';
 	$('.fruits').append(fruit);
 	var priceDiv='<div  id="'+arr1[i].name+'"'+'class="priceDisplay">'+
 							'<button class="buy">Buy</button>'+
@@ -104,21 +139,22 @@ for(var i=0;i<arr1.length;i++){
 }
 
 	var that=this;
-	// console.log(that);
-	var temp = 0;
-	var timer=setInterval(function(){
+	console.log(that);
+	//var temp = 0;
+	var newPriceGenerator=setInterval(function(){
 		for(let i=0;i<arr1.length;i++){
 		var temp='#'+'price'+arr1[i].name;
 		$(that).find(temp).remove();
 		var randomNumber = Number(generateRandomPrice());
 		arr1[i].currentPrice=Number(Number(arr1[i].currentPrice)+Number(randomNumber)).toFixed(2);
 		 var newPriceDiv='<span id="price'+arr1[i].name+'"  data-'+arr1[i].name+'="'+arr1[i].currentPrice+'">'+arr1[i].currentPrice+'</span>';
-		 var div='#'+arr1[i].name;
+		 var div='.priceDisplays #'+arr1[i].name;
+		 console.log(div);
 		 $(div).append(newPriceDiv);
 
 		 //clearInterval(timer);
 	}
-},15000)
+},5000)
 
 function updateTotalCash(){
 	$('#totalCash').find('span').remove();
@@ -129,18 +165,7 @@ function runOutOfCashFunction(){
 	$('#totalCash').append('<div  id="notEnoughCash"><span>Not Enough Cash  in the Bank</span></div>');
 }
 
-
-// function startTime() {
-//     var now=new Date();
-//     var newtime = now.getSeconds()+300000;
-//
-//     var time=$('.countdownContainer').find('span').text();
-//
-// 		$('.countdownContainer').find('span').remove();
-//     $('.countdownContainer').append('<span>'+s+'</span>');
-//     var t = setTimeout(startTime, 1000);
-// }
-})
+})   //end of document ready function.....
 
 
 //Generates random starting price for Fruit
@@ -159,6 +184,10 @@ function Fruit(name,currentPrice,quantity,totalCost){
 			this.quantity=quantity;
 			this.currentPrice=currentPrice;
 			this.totalCost=totalCost;
+			this.currentStockValue=function(){
+				var temp=Number(Number(this.quantity)*Number(this.currentPrice)).toFixed(2);
+				return temp=(temp!=NaN)? temp:0;
+			}
 }
 
 function findFruit(obj,fruit){

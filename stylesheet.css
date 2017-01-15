@@ -4,6 +4,7 @@ body{
   border: 1px solid;
 }
 
+
 .fruit{
   display: inline-block;
   height:150px;
@@ -11,6 +12,26 @@ body{
   border: 1px solid;
   margin-left: 30px;
   margin-top: 50px;
+}
+
+.fruits #grapes{
+ background-image: url("images/grapes.jpeg");
+
+}
+
+.fruits #orange{
+ background-image: url("images/orange.jpg");
+
+}
+
+.fruits #banana{
+ background-image: url("images/banana.jpg");
+
+}
+
+.fruits #apple{
+ background-image: url("images/apple.jpg");
+
 }
 
 .priceDisplay{
