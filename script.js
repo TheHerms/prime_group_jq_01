@@ -5,7 +5,7 @@ $(function() {
 
     var totalCash = 100;
     var timeCounter = 0;
-		var maxTime=300;
+		var maxTime=30;
 
     // timer
     var timeTracker = setInterval(timeUpdate, 1000);
@@ -37,7 +37,10 @@ $(function() {
             stockSaleCash = Number(Number(stockSaleCash) + Number(arr1[i].currentStockValue())).toFixed(2);
         }
         profit = Number(stockSaleCash - spentCash).toFixed(2);
+				totalCash= Number(totalCash)+Number(stockSaleCash);
         $('.finalProfitDisplay').append('<span>Total Profit Made :: ' + profit + '</span>');
+				$('#totalCash').find('span').remove();
+        $('#totalCash').append('<span>' + totalCash+ '</span>');
     }
 
     // Building an object for each fruit.
