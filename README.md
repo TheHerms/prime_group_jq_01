@@ -7,7 +7,7 @@
 * *Bob Hinkley*
 * *Charles Kuruvila*
 
-
+######*****************************######
 
 1. User has five minutes to buy & sell from a list of four commodities(Apples,Oranges,Bananas & Grapes).
 2. The market price for each commodity is displayed on the screen once the application is loaded onto the browser.
