@@ -1,77 +1,70 @@
-body{
-
-  width: 800px;
-  border: 1px solid;
+body {
+    width: 800px;
+    border: 1px solid;
+    border-radius: 10px;
 }
 
-
-.fruit{
-  display: inline-block;
-  height:150px;
-  width:150px;
-  border: 1px solid;
-  margin-left: 30px;
-  margin-top: 50px;
+.fruit {
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+    border: 1px solid;
+    margin-left: 30px;
+    margin-top: 50px;
 }
 
-.fruits #grapes{
- background-image: url("images/grapes.jpeg");
-
+.fruits #grapes {
+    background-image: url("images/grapes.jpeg");
 }
 
-.fruits #orange{
- background-image: url("images/orange.jpg");
-
+.fruits #orange {
+    background-image: url("images/orange.jpg");
 }
 
-.fruits #banana{
- background-image: url("images/banana.jpg");
-
+.fruits #banana {
+    background-image: url("images/banana.jpg");
 }
 
-.fruits #apple{
- background-image: url("images/apple.jpg");
-
+.fruits #apple {
+    background-image: url("images/apple.jpg");
 }
 
-.priceDisplay{
-  display: inline-block;
-  height:50px;
-  width:150px;
-  border: 1px solid;
-  margin-left: 30px;
-  margin-top: 50px;
-
+.priceDisplay {
+    display: inline-block;
+    height: 50px;
+    width: 150px;
+    border: 1px solid;
+    margin-left: 30px;
+    margin-top: 50px;
 }
 
-.cashDisplay{
-  margin-top:100px;
-  font-size: 30pt;
-  margin-left: 300px  ;
+.cashDisplay {
+    margin-top: 100px;
+    font-size: 30pt;
+    margin-left: 300px;
 }
 
-button{
-  width:40px;
-
+button {
+    width: 40px;
 }
 
-.countdownContainer{
-  width:200px;
-  height:40px;
-  text-align: center;
-  background:#ddd;
-  border:1px solid #999;
-  border-radius: 10px;
-  padding:10px;
-  box-shadow: 0 0 5px 3px #ccc;
+.countdownContainer {
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    background: #ddd;
+    border: 1px solid #999;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 5px 3px #ccc;
+    font-size: 30px;
 }
-
 
 table {
-   margin-top: 30px;
+    margin-top: 30px;
     border-collapse: collapse;
     width: 50%;
-    border: 1px solid ;
+    border: 1px solid;
 }
 
 th {
@@ -84,4 +77,6 @@ th, td {
     padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
