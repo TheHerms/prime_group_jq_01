@@ -43,14 +43,20 @@ body {
     font-size: 30pt;
     margin-left: 300px;
 }
+.cashDisplay{
+  margin:auto;
+}
 
 button {
     width: 40px;
 }
 
+
 .countdownContainer {
     width: 200px;
     height: 30px;
+    margin:auto;
+    margin-top:30px;
     text-align: center;
     background: #ddd;
     border: 1px solid #999;
@@ -61,6 +67,7 @@ button {
 }
 
 table {
+    margin:auto;
     margin-top: 30px;
     border-collapse: collapse;
     width: 50%;
