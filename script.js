@@ -5,7 +5,7 @@ $(function() {
 
     var totalCash = 100;
     var timeCounter = 0;
-		var maxTime=30;
+		var maxTime=300;
 
     // timer
     var timeTracker = setInterval(timeUpdate, 1000);
